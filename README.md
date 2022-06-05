@@ -17,11 +17,13 @@ Planned Features for Version 1.0
 
 * Market data socket
 
-* Order transport socket
+* Configuration file for valid symbols, maximum order quantity, price port, order port, and log file name
 
 * Logging
 
-* Documentation
+* TWAP Strategy
+
+* VWAP Strategy
 
 * Automated test suite
 
@@ -29,9 +31,11 @@ Planned Features for Version 1.0
 Planned Features for Version 1.1
 ----
 
-* Configuration file for valid symbols, maximum order quantity, price port, order port, and log file name
-
 * FIX Engine
+
+* POV Strategy
+
+* Documentation
 
 
 Planned Features for Version 1.2
