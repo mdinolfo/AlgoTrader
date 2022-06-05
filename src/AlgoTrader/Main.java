@@ -44,9 +44,20 @@ public class Main
                 }  
             } );
 
+            Configuration.initialize();
+            Logger.initialize();
+
+            Logger.getInstance().write("AlgoTrader is up.");
+
 			while ( keepRunning ) {
 				Thread.sleep ( 100 );
 			}
+
+            Logger.getInstance().write("Received termination signal.");
+
+            // orderly shutdown steps
+
+            Logger.getInstance().write("AlgoTrader shutdown complete.");
 
 		}
         catch ( Exception e )

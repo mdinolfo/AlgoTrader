@@ -26,6 +26,8 @@ MELSRC = src/AlgoTrader
 	$(JC) $(JFLAGS) $*.java
 
 MELCLASSES = \
+	$(MELSRC)/Configuration.java \
+	$(MELSRC)/Logger.java \
 	$(MELSRC)/Main.java \
 
 AlgoTrader: \

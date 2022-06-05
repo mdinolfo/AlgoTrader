@@ -8,6 +8,14 @@ See Documentation in docs folder.
 This project is licensed under GPL v3, and was compiled and run using OpenJDK 8.
 
 
+Version 1.0
+----
+
+* Logging
+
+* Configuration
+
+
 Planned Features for Version 1.0
 ----
 
@@ -15,11 +23,7 @@ Planned Features for Version 1.0
 
 * Inbound and outbound order sockets
 
-* Market data socket
-
-* Configuration file for valid symbols, maximum order quantity, price port, order port, and log file name
-
-* Logging
+* Inbound market data socket
 
 * TWAP Strategy
 
