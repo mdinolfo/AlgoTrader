@@ -32,6 +32,7 @@ public class Main
     {
         try
         {
+            // look for terminate signal to perform orderly shutdown
             final Thread mainThread = Thread.currentThread();
             Runtime.getRuntime().addShutdownHook( new Thread() {
                 public void run(){
@@ -43,20 +44,23 @@ public class Main
                     }
                 }  
             } );
+            // initialization steps go below
 
             Configuration.initialize();
             Logger.initialize();
 
+            // initialization steps go above
             Logger.getInstance().write("AlgoTrader is up.");
 
 			while ( keepRunning ) {
 				Thread.sleep ( 100 );
 			}
-
             Logger.getInstance().write("Received termination signal.");
+            // orderly shutdown steps go below
+            
+            /*_*/
 
-            // orderly shutdown steps
-
+            // orderly shutdown steps go above
             Logger.getInstance().write("AlgoTrader shutdown complete.");
 
 		}
