@@ -129,6 +129,12 @@ public class Configuration {
 
          if ( !ConfigValues.containsKey( "PINGMS" ) )
             ConfigValues.put( "PINGMS" , "5000" );
+
+         if ( !ConfigValues.containsKey( "LOGGING" ) )
+            ConfigValues.put( "LOGGING" , "STANDARD" );
+         
+         if ( !ConfigValues.containsKey( "STRATEGIES" ) )
+            ConfigValues.put( "STRATEGIES" , "" );
      }
     
     /**

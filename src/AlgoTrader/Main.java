@@ -48,6 +48,7 @@ public class Main
 
             Configuration.initialize();
             Logger.initialize();
+            Order.initialize();
 
             // initialization steps go above
             Logger.getInstance().write("AlgoTrader is up.");
