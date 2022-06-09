@@ -50,6 +50,8 @@ public class Main
             Logger.initialize();
             Order.initialize();
 
+            Trader algoTrader = new Trader();
+
             // initialization steps go above
             Logger.getInstance().write("AlgoTrader is up.");
 
