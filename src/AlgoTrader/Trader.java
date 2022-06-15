@@ -33,9 +33,38 @@
     private Map<String, Order> OrderBlotter;
 
     /**
+     * A reference to a PriceSocket object so the trader
+     * may subscribe to market data.
+     *
+     * @see PriceSocket
+     */
+    private PriceSocket PS;
+
+    /**
      * Initializes objects
      */
-    public Trader ()  {
+    public Trader () {
         OrderBlotter = new HashMap<>();
+
+        PS = null;
+    }
+
+    /**
+     * Processes market data.
+     *
+     * @param ps PriceSocket
+     */
+    public void MarketDataUpdate ( String[] tokens ) {
+        /*  TBD  */
+    }
+
+    /**
+     * Sets the PriceSocket reference.
+     *
+     * @param ps PriceSocket
+     */
+    public void SetPriceSocket ( PriceSocket ps )
+    {
+        PS = ps;
     }
  }

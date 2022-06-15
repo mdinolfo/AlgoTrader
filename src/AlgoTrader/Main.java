@@ -52,6 +52,10 @@ public class Main
 
             Trader algoTrader = new Trader();
 
+            PriceSocket ps = new PriceSocket( "PS-MAIN", algoTrader );
+
+            ps.start();
+
             // initialization steps go above
             Logger.getInstance().write("AlgoTrader is up.");
 

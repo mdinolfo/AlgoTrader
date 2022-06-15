@@ -29,6 +29,7 @@ MELCLASSES = \
 	$(MELSRC)/Configuration.java \
 	$(MELSRC)/Logger.java \
 	$(MELSRC)/Order.java \
+	$(MELSRC)/PriceSocket.java \
 	$(MELSRC)/Trader.java \
 	$(MELSRC)/Main.java \
 

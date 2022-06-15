@@ -119,13 +119,13 @@ public class Configuration {
      private void DefaultSettings ()
      {
         if ( !ConfigValues.containsKey( "ORDERIP" ) )
-            ConfigValues.put( "ORDERIP" , "192.168.0.1" );
+            ConfigValues.put( "ORDERIP" , "127.0.0.1" );
 
          if ( !ConfigValues.containsKey( "ORDERPORT" ) )
             ConfigValues.put( "ORDERPORT" , "3500" );
 
          if ( !ConfigValues.containsKey( "PRICEIP" ) )
-            ConfigValues.put( "PRICEIP" , "192.168.0.1" );
+            ConfigValues.put( "PRICEIP" , "127.0.0.1" );
             
          if ( !ConfigValues.containsKey( "PRICEPORT" ) )
             ConfigValues.put( "PRICEPORT" , "3501" );
