@@ -40,8 +40,7 @@ public class Configuration {
      * This is a singleton class.  The constructor is Protected so it
      * can never be instantiated from outside of the class.
      */
-    protected Configuration ()
-    {
+    protected Configuration () {
         ConfigValues = new HashMap<>();
     }
     
@@ -52,26 +51,21 @@ public class Configuration {
      * @throws IOException If there is already a Configuration instance,
      * or if the configuration file cannot be open
      */
-    public static void initialize () throws IOException
-    {
-        if ( ConfigurationInstance != null )
-        {
+    public static void initialize () throws IOException {
+        if ( ConfigurationInstance != null ) {
             throw new IOException("Configuration is already initialized.");
         }
 
         ConfigurationInstance = new Configuration();
 
-        try
-        {
+        try {
             BufferedReader br = new BufferedReader(new FileReader("../cfg/AlgoTrader.cfg"));
             String line;
             while ((line = br.readLine()) != null) {
                 ConfigurationInstance.ProcessInput( line );
             }
             br.close();
-        }
-        catch ( IOException e )
-        {
+        } catch ( IOException e ) {
             throw e;
         }
         
@@ -85,8 +79,7 @@ public class Configuration {
      * @param line String containing the line read from the
      * configuration file
      */
-     private void ProcessInput( String line )
-     {
+     private void ProcessInput( String line ) {
          // trim whitespace
          line = line.replaceAll("^\\s+","").replaceAll("\\s+$","");
          
@@ -97,8 +90,7 @@ public class Configuration {
          String[] token = line.split("=");
          
          // did we find a key/value pair?
-         if ( token.length == 2 )
-         {
+         if ( token.length == 2 ) {
              
              // trim whitespace from left of value and right of key
              String key = token[0].replaceAll("\\s+$","");
@@ -116,8 +108,7 @@ public class Configuration {
      * Defaults settings vital to operation only if they were not
      * set in the configuration file.
      */
-     private void DefaultSettings ()
-     {
+     private void DefaultSettings () {
         if ( !ConfigValues.containsKey( "ORDERIP" ) )
             ConfigValues.put( "ORDERIP" , "127.0.0.1" );
 
@@ -150,8 +141,7 @@ public class Configuration {
      * neither loaded nor defaulted
      * @param key String containing the parameter key.
      */
-    public String getString( String key )
-    {
+    public String getString( String key ) {
         if ( !ConfigValues.containsKey( key ) )
             return null;
         
@@ -165,8 +155,7 @@ public class Configuration {
      * neither loaded nor defaulted
      * @param key String containing the parameter key.
      */    
-    public int getInt( String key )
-    {
+    public int getInt( String key ) {
         if ( !ConfigValues.containsKey( key ) )
             return -1;
         
@@ -180,8 +169,7 @@ public class Configuration {
      * neither loaded nor defaulted
      * @param key String containing the parameter key.
      */    
-    public double getDouble( String key )
-    {
+    public double getDouble( String key ) {
         if ( !ConfigValues.containsKey( key ) )
             return -1D;
         
@@ -195,8 +183,7 @@ public class Configuration {
      * @return An instance of Configuration, or null if it was never
      * initialized.
      */
-    public static Configuration getInstance ()
-    {
+    public static Configuration getInstance () {
         return ConfigurationInstance;
     }
 }
