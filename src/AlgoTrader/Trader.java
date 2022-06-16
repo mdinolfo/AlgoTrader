@@ -33,6 +33,11 @@
     private Map<String, Order> OrderBlotter;
 
     /**
+     * List of price subscriptions
+     */
+    private Map<String, Integer> PriceSubscriptions;
+
+    /**
      * A reference to a PriceSocket object so the trader
      * may subscribe to market data.
      *
@@ -45,6 +50,7 @@
      */
     public Trader () {
         OrderBlotter = new HashMap<>();
+        PriceSubscriptions = new HashMap<>();
 
         PS = null;
     }
@@ -56,6 +62,50 @@
      */
     public void MarketDataUpdate ( String[] tokens ) {
         /*  TBD  */
+    }
+
+    /**
+     * Adds an order to the blotter
+     *
+     */
+    public void NewOrder ( Order o ) {
+        // update market data subscriptions
+        String symbol = o.getSymbol();
+        if ( PriceSubscriptions.containsKey(symbol) ) {
+            int count = PriceSubscriptions.get(symbol);
+            count++;
+            PriceSubscriptions.put(symbol, count);
+        } else {
+            PS.Subscribe(symbol);
+            PriceSubscriptions.put(symbol, 1);
+        }
+
+        /*  TBD  */
+
+        // add to blotter
+        OrderBlotter.put(o.getOrderID(), o);
+    }
+
+    /**
+     * Removes an order to the blotter
+     *
+     */
+    public void CancelOrder ( Order o ) {
+        // update market data subscriptions
+        String symbol = o.getSymbol();
+        int count = PriceSubscriptions.get(symbol);
+        count--;
+        if ( count > 0 ) {
+            PriceSubscriptions.put(symbol, count);
+        } else {
+            PS.Unsubscribe(symbol);
+            PriceSubscriptions.remove(symbol);
+        }
+
+        /*  TBD  */
+
+        // remove from blotter
+        OrderBlotter.remove(o.getOrderID());
     }
 
     /**
