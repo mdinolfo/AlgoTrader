@@ -45,8 +45,7 @@ public class Logger {
      * This is a singleton class.  The constructor is Protected so it
      * can never be instantiated from outside of the class.
      */
-    protected Logger ()
-    {
+    protected Logger () {
     }
 
     /**
@@ -56,22 +55,17 @@ public class Logger {
      * @throws IOException If there is already a Logger instance, or
      * if the output file cannot be open
      */
-    public static void initialize () throws IOException
-    {
-        if ( LoggerInstance != null )
-        {
+    public static void initialize () throws IOException {
+        if ( LoggerInstance != null ) {
             throw new IOException("Logger is already initialized.");
         }
 
         LoggerInstance = new Logger();
 
-        try
-        {
+        try {
             LoggerInstance.LogFile =
                 new FileOutputStream(FileName);
-        }
-        catch ( IOException e )
-        {
+        } catch ( IOException e ) {
             throw e;
         }
     }
@@ -82,8 +76,7 @@ public class Logger {
      * @return An instance of Logger, or null if it was never
      * initialized.
      */
-    public static Logger getInstance ()
-    {
+    public static Logger getInstance () {
         return LoggerInstance;
     }
 
@@ -95,20 +88,16 @@ public class Logger {
      * @param s The string to be written
      * @throws IOException If the logfile write or flush fails
      */
-    public void write ( String s ) throws IOException
-    {
+    public void write ( String s ) throws IOException {
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS");
         String prefix = df.format(Calendar.getInstance().getTime());
 
-        String output = prefix + ":" + s + "\n\n";
+        String output = prefix + ": " + s + "\n\n";
 
-        try
-        {
+        try {
             LogFile.write(output.getBytes());
             LogFile.flush();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             throw e;
         }
     }
