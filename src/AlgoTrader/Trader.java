@@ -76,6 +76,14 @@
     private PriceSocket PS;
 
     /**
+     * A reference to a OrderSocket object so the trader
+     * may recieve orders and reply to events.
+     *
+     * @see OrderSocket
+     */
+    private OrderSocket OS;
+
+    /**
      * Initializes objects
      */
     public Trader () {
@@ -85,6 +93,7 @@
         OfferMarketData = new HashMap<>();
 
         PS = null;
+        OS = null;
     }
 
     /**
@@ -132,7 +141,7 @@
      * Adds an order to the blotter
      *
      */
-    public void NewOrder ( Order o ) {
+    public String NewOrder ( Order o ) {
         // update market data subscriptions
         String symbol = o.getSymbol();
         if ( PriceSubscriptions.containsKey(symbol) ) {
@@ -148,13 +157,28 @@
 
         // add to blotter
         OrderBlotter.put(o.getOrderID(), o);
+
+        return "";
     }
 
     /**
-     * Removes an order to the blotter
+     * Amends an order on the blotter
      *
      */
-    public void CancelOrder ( Order o ) {
+    public String AmendOrder ( Order o ) {
+        /*  TBD  */
+
+        // add to blotter
+        OrderBlotter.put(o.getOrderID(), o);
+
+        return "";
+    }
+
+    /**
+     * Removes an order from the blotter
+     *
+     */
+    public String CancelOrder ( Order o ) {
         // update market data subscriptions
         String symbol = o.getSymbol();
         int count = PriceSubscriptions.get(symbol);
@@ -170,6 +194,8 @@
 
         // remove from blotter
         OrderBlotter.remove(o.getOrderID());
+
+        return "";
     }
 
     /**
@@ -177,8 +203,16 @@
      *
      * @param ps PriceSocket
      */
-    public void SetPriceSocket ( PriceSocket ps )
-    {
+    public void SetPriceSocket ( PriceSocket ps ) {
         PS = ps;
+    }
+
+    /**
+     * Sets the OrderSocket reference.
+     *
+     * @param ps OrderSocket
+     */
+    public void SetOrderSocket ( OrderSocket os ) {
+        OS = os;
     }
  }

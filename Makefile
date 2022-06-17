@@ -30,6 +30,7 @@ MELCLASSES = \
 	$(MELSRC)/Logger.java \
 	$(MELSRC)/Order.java \
 	$(MELSRC)/PriceSocket.java \
+	$(MELSRC)/OrderSocket.java \
 	$(MELSRC)/Trader.java \
 	$(MELSRC)/Main.java \
 
@@ -44,5 +45,3 @@ default: AlgoTrader
 clean:
 	$(RM) $(MELSRC)/*.class
 	$(RM) bin/AlgoTrader.jar
-
-
