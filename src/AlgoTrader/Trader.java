@@ -27,6 +27,30 @@
  * strategies.
  */
  public class Trader {
+
+    /**
+     * Class for storing market data points
+     */
+    private class PricePoint implements Comparable<PricePoint> {
+        public double Price;
+        public double Quantity;
+
+        public PricePoint(double px, double qty) {
+            Price = px;
+            Quantity = qty;
+        }
+
+        @Override
+        public int compareTo(PricePoint pp) {
+            return Double.compare(Price,pp.Price);
+        }
+
+        @Override
+        public String toString(){
+            return Double.toString(Price) + " " + Double.toString(Quantity) + " ";
+        }
+    }
+
     /**
      * Master list of Orders.
      */
@@ -36,6 +60,12 @@
      * List of price subscriptions
      */
     private Map<String, Integer> PriceSubscriptions;
+
+    /**
+     * Market Data
+     */
+    private Map<String, List<PricePoint>> BidMarketData;
+    private Map<String, List<PricePoint>> OfferMarketData;
 
     /**
      * A reference to a PriceSocket object so the trader
@@ -51,6 +81,8 @@
     public Trader () {
         OrderBlotter = new HashMap<>();
         PriceSubscriptions = new HashMap<>();
+        BidMarketData = new HashMap<>();
+        OfferMarketData = new HashMap<>();
 
         PS = null;
     }
@@ -61,7 +93,39 @@
      * @param ps PriceSocket
      */
     public void MarketDataUpdate ( String[] tokens ) {
-        /*  TBD  */
+        String symbol = tokens[1];
+        List<PricePoint> Bid = new LinkedList<>();
+        List<PricePoint> Offer = new LinkedList<>();
+        List<PricePoint> ListPtr = null;
+        PricePoint pp;
+        String val;
+        Double px, qty;
+        px = qty = null;
+
+        for( int i = 2; i < tokens.length; i++ ) {
+            val = tokens[i];
+            if ( val.equals("BID") ) {
+                ListPtr = Bid;
+            } else if ( val.equals("OFFER") ) {
+                ListPtr = Offer;
+            } else if ( px == null ) {
+                px = Double.parseDouble(val);
+            } else {
+                qty = Double.parseDouble(val);
+                pp = new PricePoint(px, qty);
+                ListPtr.add(pp);
+
+                px = null;
+            }
+        }
+
+        if ( Bid.size() > 0 )
+            Collections.sort(Bid, Collections.reverseOrder());
+        if ( Offer.size() > 0 )
+            Collections.sort(Offer);
+
+        BidMarketData.put(symbol, Bid);
+        OfferMarketData.put(symbol, Offer);
     }
 
     /**

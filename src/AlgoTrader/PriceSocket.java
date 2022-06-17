@@ -141,7 +141,15 @@ public class PriceSocket implements Runnable {
         if ( cmd.equals("SNAPSHOT") ) {
             trader.MarketDataUpdate(tokens);
             return "";
+        } else if ( cmd.equals("REJECT")) {
+            try {
+                Logger.getInstance().write("PS REJECT:"+InputLine);
+            } catch ( Exception e) {
+                //
+            }
+            return "";
         }
+
 
         ErrorCount++;
         if ( ErrorCount >= 3 )
